@@ -1,0 +1,59 @@
+{
+	"name": "generator-jhipster-spring",
+	"version": "0.1.0",
+	"description": "A JHipster blueprint to generate production ready RESTful application using Spring MVC",
+	"keywords": [
+		"yeoman-generator",
+		"jhipster-blueprint",
+		"jhipster-7",
+		"spring",
+		"spring-mvc",
+		"spring-boot"
+	],
+	"homepage": "https://github.com/vishal423/generator-jhipster-spring",
+	"bugs": {
+		"url": "https://github.com/vishal423/generator-jhipster-spring/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vishal423/generator-jhipster-spring.git"
+	},
+	"license": "Apache-2.0",
+	"author": {
+		"name": "Vishal Mahajan",
+		"email": "vishal423@gmail.com",
+		"url": "https://twitter.com/vishal423"
+	},
+	"main": "generators/app/index.js",
+	"bin": {
+		"jh": "./cli/jh.js"
+	},
+	"files": [
+		"cli",
+		"generators"
+	],
+	"scripts": {
+		"format": "pretty-quick",
+		"lint": "eslint .",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"chalk": "4.1.2",
+		"generator-jhipster": "7.8.1",
+		"generator-jhipster-svelte": "0.9.0"
+	},
+	"devDependencies": {
+		"ejs-lint": "1.2.2",
+		"eslint": "8.21.0",
+		"eslint-config-airbnb-base": "15.0.0",
+		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-import": "2.26.0",
+		"eslint-plugin-prettier": "4.2.1",
+		"fs-extra": "10.1.0",
+		"husky": "8.0.1",
+		"prettier": "2.7.1",
+		"pretty-quick": "3.1.3",
+		"yeoman-assert": "3.1.1",
+		"yeoman-test": "6.3.0"
+	}
+}

@@ -1,0 +1,27 @@
+name: Spring blueprint generator
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+jobs:
+    generator-jhipster-spring:
+        concurrency:
+            group: generator-${{ matrix.node_version }}-${{ matrix.apps }}-${{ github.head_ref || github.sha }}
+            cancel-in-progress: true
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 20
+        strategy:
+            fail-fast: false
+            matrix:
+                node_version: [16.x]
+                os: [ubuntu-latest]
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node_version }}
+            - run: npm ci
+            - run: npm run lint
