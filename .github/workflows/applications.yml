@@ -29,3 +29,60 @@ jobs:
                   name: docker-artifact
                   path: blueprint-artifacts/images
                   retention-days: 1
+    development-profile-builds:
+        needs: spring-blueprint-image
+        name: ${{ matrix.apps }}
+        concurrency:
+            group: apps-dev-${{ matrix.apps }}-${{ github.head_ref || github.sha }}
+            cancel-in-progress: true
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 15
+        strategy:
+            fail-fast: false
+            matrix:
+                apps: ['monolithic-session-gradle.json']
+                os: [ubuntu-latest]
+                node_version: [16.x]
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node_version }}
+            - name: Gradle - Configure cache
+              uses: actions/cache@v2
+              if: contains(matrix.apps, 'gradle')
+              with:
+                  path: |
+                      ~/.gradle/caches
+                      ~/.gradle/wrapper
+                  key: ${{ runner.os }}-gradle-7.8.1
+            - name: Retrieve saved Spring blueprint docker image
+              uses: actions/download-artifact@v2
+              with:
+                  name: docker-artifact
+                  path: blueprint-artifacts/images
+            - name: Load docker images
+              run: |
+                  cd blueprint-artifacts/images
+                  docker load < spring-blueprint-image.tar
+            - name: Prepare environment
+              run: |
+                  mkdir -p "$HOME/sample-app"
+                  mkdir -p "$HOME/.gradle"
+                  mkdir -p "$HOME/.cache"
+            - name: Generate application
+              if: contains(matrix.apps, '.json')
+              run: |
+                  cd "$HOME/sample-app"
+                  cp $TEST_SCRIPTS_PATH/${{ matrix.apps }} .yo-rc.json
+                  docker run --rm -v $PWD:/app -v $HOME/.cache:/home/jh/.cache  vishal423/jh:$GITHUB_SHA --no-insight --force
+            - name: Gradle - Unit tests
+              if: contains(matrix.apps, 'gradle')
+              run: |
+                  cd "$HOME/sample-app"
+                  docker run --rm -v $PWD:/app -v $HOME/.gradle:/home/jh/.gradle --entrypoint ./gradlew vishal423/jh:$GITHUB_SHA test --no-daemon
+            - name: Gradle - Package application
+              if: contains(matrix.apps, 'gradle')
+              run: |
+                  cd "$HOME/sample-app"
+                  docker run --rm -v $PWD:/app -v $HOME/.gradle:/home/jh/.gradle --entrypoint ./gradlew vishal423/jh:$GITHUB_SHA bootJar --no-daemon

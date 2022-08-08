@@ -1,11 +1,11 @@
 const { CAFFEINE } = require('generator-jhipster/jdl/jhipster/cache-types');
-const cacheProviderTypes = require('generator-jhipster/jdl/jhipster/cache-types');
+const { NO: NO_CACHE } = require('generator-jhipster/jdl/jhipster/cache-types');
+const { NO: NO_DATABASE } = require('generator-jhipster/jdl/jhipster/database-types');
 const { SESSION } = require('generator-jhipster/jdl/jhipster/authentication-types');
 const { GRADLE } = require('generator-jhipster/jdl/jhipster/build-tool-types');
 const { OptionNames } = require('generator-jhipster/jdl/jhipster/application-options');
 
 const { AUTHENTICATION_TYPE, BUILD_TOOL, CACHE_PROVIDER, DATABASE_TYPE, PACKAGE_NAME, SERVER_PORT } = OptionNames;
-const NO_CACHE_PROVIDER = cacheProviderTypes.NO;
 
 module.exports = {
 	askForServerSideOpts,
@@ -86,6 +86,10 @@ function askForServerSideOpts() {
 						value: 'PostgreSQL',
 						name: 'PostgreSQL',
 					},
+					{
+						value: NO_DATABASE,
+						name: 'No Database',
+					},
 				];
 			},
 			default: 'PostgreSQL',
@@ -99,11 +103,15 @@ function askForServerSideOpts() {
 					value: CAFFEINE,
 					name: 'Caffeine',
 				},
+				{
+					value: NO_CACHE,
+					name: 'No Cache',
+				},
 			],
 			default: CAFFEINE,
 		},
 		{
-			when: answers => answers.cacheProvider !== NO_CACHE_PROVIDER,
+			when: answers => answers.cacheProvider !== NO_CACHE,
 			type: 'confirm',
 			name: 'enableHibernateCache',
 			message: 'Do you want to use Hibernate 2nd level cache?',
@@ -134,11 +142,11 @@ function askForServerSideOpts() {
 
 		this.packageName = this.jhipsterConfig.packageName = answers.packageName;
 		this.serverPort = this.jhipsterConfig.serverPort = answers.serverPort || '8080';
-		this.cacheProvider = this.jhipsterConfig.cacheProvider = answers.cacheProvider || NO_CACHE_PROVIDER;
+		this.cacheProvider = this.jhipsterConfig.cacheProvider = answers.cacheProvider || NO_CACHE;
 		this.enableHibernateCache = this.jhipsterConfig.enableHibernateCache = !!answers.enableHibernateCache;
 
 		const { databaseType } = answers;
-		this.databaseType = this.jhipsterConfig.databaseType = databaseType;
+		this.databaseType = this.jhipsterConfig.databaseType = databaseType || NO_DATABASE;
 		this.devDatabaseType = this.jhipsterConfig.devDatabaseType = answers.devDatabaseType || databaseType;
 		this.prodDatabaseType = this.jhipsterConfig.prodDatabaseType = answers.prodDatabaseType || databaseType;
 

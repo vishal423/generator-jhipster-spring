@@ -1,0 +1,58 @@
+plugins {
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+	id 'java'
+}
+
+group = '<%= groupName %>'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+description='<%= description %>'
+
+springBoot {
+    mainClass = '<%= packageName %>.<%= javaMainClass %>'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+<%_
+    if(cacheProvider !== 'no' ) {
+_%>
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+<%_ } _%>
+<%_
+    if(databaseType !== 'no' ) {
+_%>
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+<%_ } _%>
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+<%_
+    if(databaseType !== 'no' ) {
+_%>
+	implementation 'org.flywaydb:flyway-core'
+<%_ } _%>
+	implementation 'org.springframework.session:spring-session-core'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+<%_
+    if(databaseType !== 'no' ) {
+_%>
+    runtimeOnly 'org.postgresql:postgresql'
+<%_ } _%>
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

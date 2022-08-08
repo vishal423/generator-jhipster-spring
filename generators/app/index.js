@@ -34,11 +34,16 @@ module.exports = class extends AppGenerator {
 			displayLogo() {
 				/* eslint-disable prettier/prettier */
 				this.log('\n');
-				this.log(`  ${chalk.green('  &&&&&&&  &&&&&&   &&&&&&&   &&&&&&&&  &&     &&   &&&&&&&  ')}`);
-				this.log(`  ${chalk.green(' &&        &&   &&  &&    &&     &&     &&&    &&  &&        ')}`);
-				this.log(`  ${chalk.green('   &&&&&   &&&&&&   &&&&&&       &&     &&  && &&  &&   &&&& ')}`);
-				this.log(`  ${chalk.green('       &&  &&       && &&        &&     &&    &&&  &&    &&  ')}`);
-				this.log(`  ${chalk.green(' &&&&&&&   &&       &&    &&  &&&&&&&&  &&     &&    &&&&&   ')}`);
+				this.log(`  ${chalk.green('      .d88888b.                     .d88888b.     ')}`);
+				this.log(`  ${chalk.green('    d8P        Y8b.             .d8Y        P8d.  ')}`);
+				this.log(`  ${chalk.green('   888            888.       .888            888. ')}`);
+				this.log(`  ${chalk.green('  888                888   888                888.')}`);
+				this.log(`  ${chalk.green('  888                  88888                  888.')}`);
+				this.log(`  ${chalk.green('  888                888   888                888.')}`);
+				this.log(`  ${chalk.green('   888            888"       "888            888. ')}`);
+				this.log(`  ${chalk.green('    Y88b       d8P"             "d8P       d88P.  ')}`);
+				this.log(`  ${chalk.green('      "Y888P8P"                     "Y888P8P".    ')}`);
+
 				this.log('\n');
 				this.log(chalk.white.bold('       https://www.jhipster.tech\n'));
 				this.log(chalk.white('Welcome to Spring Hipster ') + chalk.yellow(`v${this.blueprintjs.version}`));
