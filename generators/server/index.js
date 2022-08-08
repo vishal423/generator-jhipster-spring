@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const os = require('os');
 const ServerGenerator = require('generator-jhipster-svelte/generators/server');
+const { GRADLE } = require('generator-jhipster/jdl/jhipster/build-tool-types');
 const { writeFiles } = require('./files');
 const { askForServerSideOpts, askForOptionalItems } = require('./prompts');
 const { askForModuleName } = require('../base');
@@ -61,7 +62,15 @@ module.exports = class extends ServerGenerator {
 	}
 
 	get loading() {
-		return super._loading();
+		const phaseFromJHipster = super._loading();
+		return {
+			...phaseFromJHipster,
+			loadBlueprintConfig() {
+				this.artifactName = this.blueprintConfig.artifactName;
+				this.groupName = this.blueprintConfig.groupName;
+				this.description = this.blueprintConfig.description;
+			},
+		};
 	}
 
 	get preparing() {
@@ -78,6 +87,9 @@ module.exports = class extends ServerGenerator {
 			return {};
 		}
 		return {
+			configureConstants() {
+				this.javaMainClass = `${this.mainClass.substring(0, this.mainClass.length - 3)}Application`;
+			},
 			writeAdditionalFile() {
 				writeFiles.call(this);
 			},
@@ -96,7 +108,7 @@ module.exports = class extends ServerGenerator {
 			...jhipsterDefault,
 			end() {
 				let executable = 'mvnw';
-				if (this.buildTool === 'gradle') {
+				if (this.buildTool === GRADLE) {
 					executable = 'gradlew';
 				}
 

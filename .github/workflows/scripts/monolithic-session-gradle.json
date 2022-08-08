@@ -1,0 +1,57 @@
+{
+	"generator-jhipster": {
+		"applicationType": "monolith",
+		"authenticationType": "session",
+		"baseName": "assessment-companion",
+		"blueprints": [
+			{
+				"name": "generator-jhipster-spring",
+				"version": "0.1.0"
+			}
+		],
+		"buildTool": "gradle",
+		"cacheProvider": "no",
+		"clientFramework": "no",
+		"clientPackageManager": "npm",
+		"clientTheme": "none",
+		"clientThemeVariant": "",
+		"creationTimestamp": 1659983814912,
+		"databaseType": "no",
+		"devDatabaseType": "no",
+		"dtoSuffix": "DTO",
+		"enableGradleEnterprise": false,
+		"enableHibernateCache": false,
+		"enableTranslation": false,
+		"entitySuffix": "",
+		"jhiPrefix": "jhi",
+		"jhipsterVersion": "7.8.1",
+		"languages": ["en"],
+		"nativeLanguage": "en",
+		"otherModules": [
+			{
+				"name": "generator-jhipster-spring",
+				"version": "0.1.0"
+			}
+		],
+		"packageName": "io.github.vishal423.assessment",
+		"pages": [],
+		"prodDatabaseType": "no",
+		"reactive": false,
+		"rememberMeKey": "7e52cd85fb1e019c914f0a17ac4f47fba74c4527eb0fd29e01d1d4e52a9c6c7a4fb68d1e8e3a461c066d5e26494655f0cb17",
+		"searchEngine": false,
+		"serverPort": 8080,
+		"serviceDiscoveryType": false,
+		"skipCheckLengthOfIdentifier": false,
+		"skipClient": true,
+		"skipFakeData": false,
+		"skipUserManagement": true,
+		"testFrameworks": [],
+		"websocket": false,
+		"withAdminUi": ""
+	},
+	"generator-jhipster-spring": {
+		"artifactName": "assessment-companion",
+		"description": "Assessment Companion for Kids exams",
+		"groupName": "io.github.vishal423"
+	}
+}
