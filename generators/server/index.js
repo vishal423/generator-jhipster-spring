@@ -24,22 +24,7 @@ module.exports = class extends ServerGenerator {
 	}
 
 	get initializing() {
-		const phaseFromJHipster = super._initializing();
-		return {
-			...phaseFromJHipster,
-			displayLogo() {
-				// don't overwrite logo
-			},
-			initializeBlueprintOptions() {
-				if (this.options.swaggerUi) {
-					this.swaggerUi = this.options.swaggerUi;
-				} else if (this.blueprintConfig) {
-					this.swaggerUi = this.blueprintConfig.swaggerUi;
-				} else {
-					this.swaggerUi = false;
-				}
-			},
-		};
+		return super._initializing();
 	}
 
 	// eslint-disable-next-line class-methods-use-this
@@ -83,15 +68,16 @@ module.exports = class extends ServerGenerator {
 
 	// eslint-disable-next-line class-methods-use-this
 	get writing() {
-		if (this.skipServer) {
-			return {};
-		}
 		return {
 			configureConstants() {
-				this.javaMainClass = `${this.mainClass.substring(0, this.mainClass.length - 3)}Application`;
+				if (!this.skipServer) {
+					this.javaMainClass = `${this.mainClass.substring(0, this.mainClass.length - 3)}Application`;
+				}
 			},
 			writeAdditionalFile() {
-				writeFiles.call(this);
+				if (!this.skipServer) {
+					writeFiles.call(this);
+				}
 			},
 		};
 	}
@@ -103,28 +89,6 @@ module.exports = class extends ServerGenerator {
 	}
 
 	get end() {
-		const jhipsterDefault = super._end();
-		return {
-			...jhipsterDefault,
-			end() {
-				let executable = 'mvnw';
-				if (this.buildTool === GRADLE) {
-					executable = 'gradlew';
-				}
-
-				const logMsgComment =
-					os.platform() === 'win32'
-						? ` (${chalk.yellow.bold(executable)} if using Windows Command Prompt)`
-						: '';
-
-				this.log(
-					chalk.green(
-						`\nStart backend Spring Boot application with : ${chalk.yellow.bold(
-							`./${executable}`
-						)}${logMsgComment}`
-					)
-				);
-			},
-		};
+		return super._end();
 	}
 };

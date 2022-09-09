@@ -18,10 +18,13 @@ module.exports = class extends AppGenerator {
 			defaults: false,
 		});
 
+		if (!this.blueprintConfig) {
+			this.blueprintConfig = {};
+		}
+
 		if (this.options.swaggerUi) {
 			this.blueprintConfig.swaggerUi = this.options.swaggerUi;
-		} else if (!this.blueprintConfig) {
-			this.blueprintConfig = {};
+		} else {
 			this.blueprintConfig.swaggerUi = false;
 		}
 	}
@@ -86,7 +89,8 @@ module.exports = class extends AppGenerator {
 		const jhipsterDefault = super._composing();
 		return {
 			...jhipsterDefault,
-			askForTestOpts: prompts.askForTestOpts,
+			askForTestOpts: undefined,
+			askForMoreModules: undefined,
 		};
 	}
 

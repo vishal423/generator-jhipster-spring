@@ -26,37 +26,25 @@ module.exports = class extends LanguagesGenerator {
 	}
 
 	get prompting() {
-		const defaultPhaseFromJHipster = super._prompting();
-		return {
-			...defaultPhaseFromJHipster,
-			askI18n: undefined,
-			askForLanguages: undefined,
-			overrideConfigOptions() {
-				this.enableTranslation = this.jhipsterConfig.enableTranslation = false;
-				this.languages = this.jhipsterConfig.languages = ['en'];
-			},
-		};
+		return super._prompting();
 	}
 
 	get configuring() {
 		return super._configuring();
 	}
-
 	get loading() {
 		return super._loading();
 	}
-
 	get preparing() {
 		return super._preparing();
 	}
-
 	get default() {
 		return super._default();
 	}
-
-	// eslint-disable-next-line class-methods-use-this
 	get writing() {
-		// we don't yet support i18n
-		return {};
+		return super._writing();
+	}
+	get postWriting() {
+		return super._postWriting();
 	}
 };

@@ -1,6 +1,6 @@
 module.exports = {
 	askForApplicationType,
-	askForTestOpts,
+	//	askForTestOpts,
 };
 
 async function askForApplicationType() {
@@ -26,25 +26,25 @@ async function askForApplicationType() {
 	this.applicationType = this.jhipsterConfig.applicationType = answers.applicationType;
 }
 
-async function askForTestOpts() {
-	if (this.existingProject) return;
-
-	const choices = [];
-	const defaultChoice = [];
-
-	if (!this.skipServer) {
-		choices.push({ name: 'Gatling', value: 'gatling' });
-	}
-
-	const PROMPT = {
-		type: 'checkbox',
-		name: 'testFrameworks',
-		message: 'Choose additional testing frameworks to use in the application.',
-		choices,
-		default: defaultChoice,
-	};
-
-	const answers = choices.length ? await this.prompt(PROMPT) : { testFrameworks: [] };
-
-	this.testFrameworks = this.jhipsterConfig.testFrameworks = answers.testFrameworks;
-}
+//async function askForTestOpts() {
+//	if (this.existingProject) return;
+//
+//	const choices = [];
+//	const defaultChoice = [];
+//
+//	if (!this.skipServer) {
+//		choices.push({ name: 'Gatling', value: 'gatling' });
+//	}
+//
+//	const PROMPT = {
+//		type: 'checkbox',
+//		name: 'testFrameworks',
+//		message: 'Choose additional testing frameworks to use in the application.',
+//		choices,
+//		default: defaultChoice,
+//	};
+//
+//	const answers = choices.length ? await this.prompt(PROMPT) : { testFrameworks: [] };
+//
+//	this.testFrameworks = this.jhipsterConfig.testFrameworks = answers.testFrameworks;
+//}

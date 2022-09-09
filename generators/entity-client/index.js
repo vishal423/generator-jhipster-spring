@@ -1,11 +1,11 @@
 const chalk = require('chalk');
-const CommonGenerator = require('generator-jhipster-svelte/generators/common');
-const { writeCommonFiles } = require('./files');
+const EntityClientGenerator = require('generator-jhipster-svelte/generators/entity-client');
 const blueprintPackageJson = require('../../package.json');
 
-module.exports = class extends CommonGenerator {
+module.exports = class extends EntityClientGenerator {
 	constructor(args, opts) {
 		super(args, { ...opts, fromBlueprint: true });
+
 		const jhContext = (this.jhipsterContext = this.options.jhipsterContext);
 
 		if (!jhContext) {
@@ -23,6 +23,18 @@ module.exports = class extends CommonGenerator {
 		return super._initializing();
 	}
 
+	get prompting() {
+		return super._prompting();
+	}
+
+	get configuring() {
+		return super._configuring();
+	}
+
+	get composing() {
+		return super._composing();
+	}
+
 	get loading() {
 		return super._loading();
 	}
@@ -35,18 +47,15 @@ module.exports = class extends CommonGenerator {
 		return super._default();
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	get writing() {
-		return {
-			...super._writing(),
-			configurePrettier() {
-				this.javaPrettier = false;
-				this.prettier = !this.skipClient;
-				this.skipCommitHook = this.skipClient;
-			},
-			overrideCommonFiles() {
-				writeCommonFiles.call(this);
-			},
-		};
+		return super._writing();
+	}
+
+	get postWriting() {
+		return super._postWriting();
+	}
+
+	get end() {
+		return super._end();
 	}
 };

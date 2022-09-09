@@ -21,6 +21,10 @@ module.exports = class extends ClientGenerator {
 		this.skipClient = this.config.get('skipClient') || false;
 	}
 
+	get initializing() {
+		return super._initializing();
+	}
+
 	get prompting() {
 		const defaultPhaseFromJHipster = super._prompting();
 		return {
@@ -39,12 +43,40 @@ module.exports = class extends ClientGenerator {
 		};
 	}
 
+	get configuring() {
+		return super._configuring();
+	}
+
+	get composing() {
+		return super._composing();
+	}
+
 	get loading() {
 		return super._loading();
 	}
 
-	// eslint-disable-next-line class-methods-use-this
+	get preparing() {
+		return super._preparing();
+	}
+
+	get default() {
+		return super._default();
+	}
+
 	get writing() {
-		return {};
+		return {
+			...super._writing(),
+			configurePrettier() {
+				this.javaPrettier = false;
+			},
+		};
+	}
+
+	get postWriting() {
+		return super._postWriting();
+	}
+
+	get end() {
+		return super._end();
 	}
 };

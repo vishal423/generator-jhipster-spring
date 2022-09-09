@@ -7,6 +7,10 @@ async function askForClient() {
 
 	const choices = [
 		{
+			value: 'svelte',
+			name: 'Svelte',
+		},
+		{
 			value: 'no',
 			name: 'No Client',
 		},
@@ -17,11 +21,12 @@ async function askForClient() {
 		name: 'clientFramework',
 		message: `Choose a client framework.`,
 		choices,
-		default: 'no',
+		default: 'svelte',
 	});
 
 	this.clientFramework = this.jhipsterConfig.clientFramework = answers.clientFramework;
 	if (this.clientFramework === 'no') {
 		this.skipClient = this.jhipsterConfig.skipClient = true;
+		console.log(`Client skipped ${this.skipClient}`);
 	}
 }
