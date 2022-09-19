@@ -33,18 +33,23 @@ module.exports = class extends CypressGenerator {
 	get configuring() {
 		return super._configuring();
 	}
+
 	get loading() {
 		return super._loading();
 	}
+
 	get preparing() {
 		return super._preparing();
 	}
+
 	get default() {
 		return super._default();
 	}
+
 	get writing() {
 		return super._writing();
 	}
+
 	get postWriting() {
 		return super._postWriting();
 	}

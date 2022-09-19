@@ -1,7 +1,5 @@
 const chalk = require('chalk');
-const os = require('os');
 const ServerGenerator = require('generator-jhipster-svelte/generators/server');
-const { GRADLE } = require('generator-jhipster/jdl/jhipster/build-tool-types');
 const { writeFiles } = require('./files');
 const { askForServerSideOpts, askForOptionalItems } = require('./prompts');
 const { askForModuleName } = require('../base');

@@ -27,6 +27,5 @@ async function askForClient() {
 	this.clientFramework = this.jhipsterConfig.clientFramework = answers.clientFramework;
 	if (this.clientFramework === 'no') {
 		this.skipClient = this.jhipsterConfig.skipClient = true;
-		console.log(`Client skipped ${this.skipClient}`);
 	}
 }

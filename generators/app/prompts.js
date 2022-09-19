@@ -26,7 +26,7 @@ async function askForApplicationType() {
 	this.applicationType = this.jhipsterConfig.applicationType = answers.applicationType;
 }
 
-//async function askForTestOpts() {
+// async function askForTestOpts() {
 //	if (this.existingProject) return;
 //
 //	const choices = [];
@@ -47,4 +47,4 @@ async function askForApplicationType() {
 //	const answers = choices.length ? await this.prompt(PROMPT) : { testFrameworks: [] };
 //
 //	this.testFrameworks = this.jhipsterConfig.testFrameworks = answers.testFrameworks;
-//}
+// }
