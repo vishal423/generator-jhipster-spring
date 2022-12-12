@@ -38,7 +38,7 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
-		"chalk": "4.1.2",
+		"chalk": "5.2.0",
 		"generator-jhipster": "7.9.3",
 		"generator-jhipster-svelte": "0.10.2"
 	},
